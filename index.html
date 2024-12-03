@@ -99,34 +99,44 @@
         </div>
     </div>
     <script>
+        /**
+         * Toggles the switches so that only one is active at a time.
+         * @param {number} level - The speed level to activate (1-7).
+         */
         function toggleSwitch(level) {
-            const isChecked = document.getElementById(`switch${level}`).checked;
-
-            // Save the state to localStorage
-            localStorage.setItem(`switch${level}`, isChecked);
-
-            // Update display
-            const display = document.getElementById('display');
-            display.innerText = isChecked ? `Fan Speed: ${level}` : `Fan Speed: 0`;
-
-            // Log the action
-            console.log(`Switch ${level} is now ${isChecked ? 'ON' : 'OFF'}`);
-        }
-
-        function loadSwitchStates() {
-            for (let i = 1; i <= 7; i++) {
-                const savedState = localStorage.getItem(`switch${i}`) === 'true';
-                document.getElementById(`switch${i}`).checked = savedState;
-
-                // Update display for the last ON switch
-                if (savedState) {
-                    document.getElementById('display').innerText = `Fan Speed: ${i}`;
+            const switches = document.querySelectorAll('input[type="checkbox"]');
+            
+            // Turn off all switches except the selected one
+            switches.forEach((sw, index) => {
+                if (index + 1 !== level) {
+                    sw.checked = false;
                 }
+            });
+
+            // Save the selected switch to localStorage
+            if (document.getElementById(`switch${level}`).checked) {
+                localStorage.setItem('activeSwitch', level);
+                document.getElementById('display').innerText = `Fan Speed: ${level}`;
+            } else {
+                localStorage.removeItem('activeSwitch');
+                document.getElementById('display').innerText = 'Fan Speed: 0';
             }
         }
 
-        // Load switch states on page load
-        window.onload = loadSwitchStates;
+        /**
+         * Loads the previously active switch state from localStorage.
+         */
+        function loadSwitchState() {
+            const activeSwitch = parseInt(localStorage.getItem('activeSwitch'), 10);
+
+            if (activeSwitch && activeSwitch >= 1 && activeSwitch <= 7) {
+                document.getElementById(`switch${activeSwitch}`).checked = true;
+                document.getElementById('display').innerText = `Fan Speed: ${activeSwitch}`;
+            }
+        }
+
+        // Load the switch state on page load
+        window.onload = loadSwitchState;
     </script>
 </body>
 </html>
