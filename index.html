@@ -22,6 +22,11 @@
             border: 2px solid #333;
             background-color: #fff;
         }
+        #clicked-button {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #007BFF;
+        }
         .speed-button {
             padding: 10px 30px;
             margin: 5px;
@@ -40,6 +45,7 @@
 </head>
 <body>
     <div id="display">Fan Speed: 0</div>
+    <div id="clicked-button">No button clicked yet</div>
     <div id="controls">
         <!-- Buttons for adjusting fan speed -->
         <button class="speed-button" data-number="1" onclick="setSpeed(1)">Speed 1</button>
@@ -59,6 +65,7 @@
          */
         function setSpeed(level) {
             const speedDisplay = document.getElementById('display');
+            const clickedButtonDisplay = document.getElementById('clicked-button');
             
             // Validate the speed level input
             if (level < 1 || level > 7) {
@@ -70,11 +77,11 @@
                 // Update display with the chosen speed level
                 speedDisplay.innerText = 'Fan Speed: ' + level;
 
+                // Update clicked button display
+                clickedButtonDisplay.innerText = 'You clicked: Button ' + level;
+
                 // Log information about the action performed
                 console.log('Setting fan speed to level ' + level);
-
-                // Placeholder for integrating actual hardware interaction logic
-                // Example: hardwareInterface.setFanSpeed(level);
 
             } catch (error) {
                 // Log error details for debugging
@@ -84,14 +91,6 @@
                 alert('There was an error setting the fan speed. Please try again.');
             }
         }
-
-        // Event listener to log button number on click
-        document.querySelectorAll('.speed-button').forEach(button => {
-            button.addEventListener('click', event => {
-                const buttonNumber = event.target.getAttribute('data-number');
-                console.log('Button Clicked: Button Number', buttonNumber);
-            });
-        });
     </script>
 </body>
 </html>
