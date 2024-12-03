@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fan Operation Panel</title>
+    <style>
+        /* Styles for a visually appealing and user-friendly interface */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        #display {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            padding: 15px;
+            width: 250px;
+            text-align: center;
+            border: 2px solid #333;
+            background-color: #fff;
+        }
+        .speed-button {
+            padding: 10px 30px;
+            margin: 5px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #007BFF;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .speed-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="display">Fan Speed: 0</div>
+    <div id="controls">
+        <!-- Buttons for adjusting fan speed -->
+        <button class="speed-button" onclick="setSpeed(1)">Speed 1</button>
+        <button class="speed-button" onclick="setSpeed(2)">Speed 2</button>
+        <button class="speed-button" onclick="setSpeed(3)">Speed 3</button>
+        <button class="speed-button" onclick="setSpeed(4)">Speed 4</button>
+        <button class="speed-button" onclick="setSpeed(5)">Speed 5</button>
+        <button class="speed-button" onclick="setSpeed(6)">Speed 6</button>
+        <button class="speed-button" onclick="setSpeed(7)">Speed 7</button>
+    </div>
+    <script>
+        /**
+         * Sets the fan speed level and updates the display.
+         * Simulates sending the command to fan hardware.
+         * 
+         * @param {number} level - The fan speed level to set (1-7).
+         */
+        function setSpeed(level) {
+            const speedDisplay = document.getElementById('display');
+            
+            // Validate the speed level input
+            if (level < 1 || level > 7) {
+                alert('Invalid speed setting. Please choose a speed between 1 and 7.');
+                return;
+            }
+            
+            try {
+                // Update display with the chosen speed level
+                speedDisplay.innerText = 'Fan Speed: ' + level;
+
+                // Log information about the action performed
+                console.log('Setting fan speed to level ' + level);
+
+                // Placeholder for integrating actual hardware interaction logic
+                // Example: hardwareInterface.setFanSpeed(level);
+
+            } catch (error) {
+                // Log error details for debugging
+                console.error('Failed to set fan speed:', error);
+
+                // Inform the user about the error situation
+                alert('There was an error setting the fan speed. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>
