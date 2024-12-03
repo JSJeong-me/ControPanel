@@ -100,12 +100,12 @@
     </div>
     <script>
         /**
-         * Toggles the switches so that only one is active at a time.
-         * @param {number} level - The speed level to activate (1-7).
+         * Toggles switches to ensure only one is active at a time.
+         * @param {number} level - The switch level to activate (1-7).
          */
         function toggleSwitch(level) {
             const switches = document.querySelectorAll('input[type="checkbox"]');
-            
+
             // Turn off all switches except the selected one
             switches.forEach((sw, index) => {
                 if (index + 1 !== level) {
