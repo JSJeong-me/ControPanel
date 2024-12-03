@@ -42,13 +42,13 @@
     <div id="display">Fan Speed: 0</div>
     <div id="controls">
         <!-- Buttons for adjusting fan speed -->
-        <button class="speed-button" onclick="setSpeed(1)">Speed 1</button>
-        <button class="speed-button" onclick="setSpeed(2)">Speed 2</button>
-        <button class="speed-button" onclick="setSpeed(3)">Speed 3</button>
-        <button class="speed-button" onclick="setSpeed(4)">Speed 4</button>
-        <button class="speed-button" onclick="setSpeed(5)">Speed 5</button>
-        <button class="speed-button" onclick="setSpeed(6)">Speed 6</button>
-        <button class="speed-button" onclick="setSpeed(7)">Speed 7</button>
+        <button class="speed-button" data-number="1" onclick="setSpeed(1)">Speed 1</button>
+        <button class="speed-button" data-number="2" onclick="setSpeed(2)">Speed 2</button>
+        <button class="speed-button" data-number="3" onclick="setSpeed(3)">Speed 3</button>
+        <button class="speed-button" data-number="4" onclick="setSpeed(4)">Speed 4</button>
+        <button class="speed-button" data-number="5" onclick="setSpeed(5)">Speed 5</button>
+        <button class="speed-button" data-number="6" onclick="setSpeed(6)">Speed 6</button>
+        <button class="speed-button" data-number="7" onclick="setSpeed(7)">Speed 7</button>
     </div>
     <script>
         /**
@@ -84,6 +84,14 @@
                 alert('There was an error setting the fan speed. Please try again.');
             }
         }
+
+        // Event listener to log button number on click
+        document.querySelectorAll('.speed-button').forEach(button => {
+            button.addEventListener('click', event => {
+                const buttonNumber = event.target.getAttribute('data-number');
+                console.log('Button Clicked: Button Number', buttonNumber);
+            });
+        });
     </script>
 </body>
 </html>
